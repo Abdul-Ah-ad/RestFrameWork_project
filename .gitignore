@@ -55,4 +55,4 @@ node_modules/
 *.bak
 *.tmp
 *.old
-myproject_core/settings/local.py
+core_project/settings/local.py

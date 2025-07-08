@@ -10,6 +10,7 @@ A cricket stats API built using Django REST Framework. It allows importing teams
 ```bash
 git clone https://github.com/Abdul-Ah-ad/RestFrameWork_project/cricdata-api.git
 cd cricdata-api
+git checkout ahad/feat/Cric_Api
 
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
