@@ -1,9 +1,21 @@
 from django.db import models
-from django.utils import timezone
+
+# === Constants === #
+FORMAT_ODI = 'odi'
+FORMAT_TEST = 'test'
+FORMAT_T20 = 't20'
+FORMAT_UNKNOWN = 'unknown'
+
+MATCH_FORMAT_CHOICES = [
+    (FORMAT_ODI, 'ODI'),
+    (FORMAT_TEST, 'Test'),
+    (FORMAT_T20, 'T20'),
+    (FORMAT_UNKNOWN, 'Unknown'),
+]
 
 
 class Team(models.Model):
-    team_id = models.IntegerField(unique=True)  # Still unique per team
+    team_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=100)
     short_name = models.CharField(max_length=20, blank=True)
     country_name = models.CharField(max_length=100, blank=True, null=True)
@@ -14,14 +26,14 @@ class Team(models.Model):
 
 
 class Player(models.Model):
-    player_id = models.IntegerField()  # ❌ No unique=True here anymore
+    player_id = models.IntegerField()
     name = models.CharField(max_length=100)
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True)
 
     format = models.CharField(
         max_length=10,
-        choices=(('odi', 'ODI'), ('test', 'Test'), ('t20', 'T20'), ('unknown', 'Unknown')),
-        default='unknown'
+        choices=MATCH_FORMAT_CHOICES,
+        default=FORMAT_UNKNOWN
     )
 
     role = models.CharField(max_length=50)
@@ -47,7 +59,9 @@ class Player(models.Model):
     five_wicket_hauls = models.IntegerField(null=True, blank=True)
 
     class Meta:
-        unique_together = ('player_id', 'format')  # ✅ This allows same player for different formats
+        unique_together = ('player_id', 'format')
 
     def __str__(self):
         return f"{self.name} ({self.format})"
+
+

@@ -25,3 +25,4 @@ class Migration(migrations.Migration):
             unique_together={('player_id', 'format')},
         ),
     ]
+
