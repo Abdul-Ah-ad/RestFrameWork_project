@@ -7,7 +7,7 @@ from cricdata_api.viewsets import (InjectDataViewSet, PlayerViewSet,
 router = DefaultRouter()
 router.register('teams', TeamViewSet, basename='team')
 router.register('players', PlayerViewSet, basename='player')
-router.register('inject-data', InjectDataViewSet, basename='inject-data')
+router.register('inject-teams-data', InjectDataViewSet, basename='inject-data')
 router.register('team-analysis', TeamAnalysisViewSet, basename='team-analysis')
 
 urlpatterns = [

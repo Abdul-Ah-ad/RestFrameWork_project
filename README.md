@@ -29,16 +29,18 @@ Using Postman
 Set base URL: http://127.0.0.1:8000
 
 2. Admin-only Endpoint (Import JSON)
-POST to: /injectTeams/import_data/
+POST to: /inject-teams-data/import_data/
 
 Authorization → Basic Auth → Provide Django admin credentials
 
 
 Endpoint	Method	Access
+/user/token/
+
 /teams/	GET	✅ Public (anyone)
 /teams/	POST	🔐 Admin only
 /players/	GET	✅ Public (anyone)
 /players/	POST	🔐 Admin only
-/inject-data/import_data/	POST	Import teams and players from JSON (admin only)
+/inject-teams-data/import_data/	POST	Import teams and players from JSON (admin only)
 /team-analysis/best/?team=Pakistan&category=odi	GET	Get best XI players by team and match type
 

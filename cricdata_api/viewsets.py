@@ -4,32 +4,21 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
 from cricdata_api.models import Player, Team
-from cricdata_api.serializers import (PlayerSerializer, TeamSerializer,
-                                      TeamWithPlayersSerializer)
-from cricdata_api.utils import (get_best_xi, load_json_file,
-                                sync_teams_and_players_from_json)
+from cricdata_api.serializers import PlayerSerializer, TeamSerializer
+from cricdata_api.utils import get_best_eleven_players, load_json_file, sync_teams_and_players_from_json
+from cricdata_api.permission import AdminPostPermissionMixin
 
 DEFAULT_MATCH_CATEGORY = 'odi'
 
 
-class TeamViewSet(viewsets.ModelViewSet):
+class TeamViewSet(AdminPostPermissionMixin, viewsets.ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
 
-    def get_permissions(self):
-        if self.request.method == 'POST':
-            return [IsAdminUser()]
-        return [AllowAny()]
 
-class PlayerViewSet(viewsets.ModelViewSet):
+class PlayerViewSet(AdminPostPermissionMixin, viewsets.ModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
-
-    def get_permissions(self):
-        if self.request.method == 'POST':
-            return [IsAdminUser()]
-        return [AllowAny()]
-
 
 
 class InjectDataViewSet(viewsets.ViewSet):
@@ -79,7 +68,5 @@ class TeamAnalysisViewSet(viewsets.ViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        result = get_best_xi(team_name, match_category)
+        result = get_best_eleven_players(team_name, match_category)
         return Response(result, status=status.HTTP_200_OK)
-
-

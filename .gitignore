@@ -55,4 +55,5 @@ node_modules/
 *.bak
 *.tmp
 *.old
-core_project/settings/local.py
+cric_api_project/settings/local.py
+combined_stats.json

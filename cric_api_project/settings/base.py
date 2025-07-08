@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'cricdata_api',
     'django_extensions',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -52,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'core_project.urls'
+ROOT_URLCONF = 'cric_api_project.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core_project.wsgi.application'
+WSGI_APPLICATION = 'cric_api_project.wsgi.application'
 
 
 
