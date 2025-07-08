@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 class Team(models.Model):
     team_id = models.IntegerField(unique=True)  # Still unique per team
     name = models.CharField(max_length=100)

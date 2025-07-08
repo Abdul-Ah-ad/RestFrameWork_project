@@ -1,14 +1,21 @@
 from rest_framework import serializers
-from cricdata_api.models import Team, Player
+
+from cricdata_api.models import Player, Team
 
 
-class PlayerImportSerializer(serializers.ModelSerializer):
+class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
         exclude = ['id']
 
 
-class TeamImportSerializer(serializers.ModelSerializer):
+class TeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Team
+        fields = ['team_id', 'name', 'short_name', 'country_name']
+
+
+class TeamWithPlayersSerializer(serializers.ModelSerializer):
     players = serializers.ListField(write_only=True)
 
     class Meta:
@@ -37,7 +44,6 @@ class TeamImportSerializer(serializers.ModelSerializer):
             player_id = player.get("player_id")
             name = player.get("name")
             role = player.get("role", "Unknown")
-
             batting_styles = player.get("batting_style")
             bowling_styles = player.get("bowling_style")
 
@@ -55,8 +61,6 @@ class TeamImportSerializer(serializers.ModelSerializer):
                         "is_active": True,
                         "batting_style": batting_styles,
                         "bowling_style": bowling_styles,
-
-                        # Batting stats
                         "matches": bat.get("matches"),
                         "innings": bat.get("innings"),
                         "runs": bat.get("runs"),
@@ -64,8 +68,6 @@ class TeamImportSerializer(serializers.ModelSerializer):
                         "strike_rate": bat.get("strike_rate"),
                         "fifties": bat.get("fifties"),
                         "hundreds": bat.get("hundreds"),
-
-                        # Bowling stats
                         "overs": bowl.get("overs"),
                         "wickets": bowl.get("wickets"),
                         "economy": bowl.get("economy"),
