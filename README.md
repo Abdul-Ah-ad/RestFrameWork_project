@@ -24,23 +24,30 @@ python manage.py migrate
 
 python manage.py createsuperuser
 
+python manage.py inject_teams_data combined_stats.json #save .json file in root folder
+
 Using Postman
 1. Import API in Postman
 Set base URL: http://127.0.0.1:8000
 
 2. Admin-only Endpoint (Import JSON)
-POST to: /inject-teams-data/import_data/
+api/inject-teams-data/upload/
 
-Authorization → Basic Auth → Provide Django admin credentials
+
+Authorization → basic Auth → Provide Django admin credentials
+api/user/token/ token for admin post requests 
+get the access token 
+Open in Authorization Bearer Token paste access token
+open Body -> form-data->key=file,type=input,value=selectfile(.json)
+send 
 
 
 Endpoint	Method	Access
-/user/token/
-
+/user/token/ token for admin post requests 
 /teams/	GET	✅ Public (anyone)
 /teams/	POST	🔐 Admin only
 /players/	GET	✅ Public (anyone)
 /players/	POST	🔐 Admin only
-/inject-teams-data/import_data/	POST	Import teams and players from JSON (admin only)
+/inject-teams-data/upload/	POST	Import teams and players from JSON (admin only)
 /team-analysis/best/?team=Pakistan&category=odi	GET	Get best XI players by team and match type
 

@@ -1,8 +1,3 @@
-# cricdata_api/constants.py
-
-# =========================
-# Player Role Choices
-# =========================
 ROLE_STRING_TO_INT = {
     'BATSMEN': 1,
     'BATSMAN': 1,
@@ -26,9 +21,8 @@ ROLE_ID_TO_LABEL = {
 
 PLAYER_ROLE_CHOICES = sorted(ROLE_ID_TO_LABEL.items())
 
-# =========================
-# Match Format Constants
-# =========================
+DEFAULT_MATCH_CATEGORY = 'odi'
+
 FORMAT_ODI = 'odi'
 FORMAT_TEST = 'test'
 FORMAT_T20 = 't20'
@@ -43,18 +37,17 @@ MATCH_FORMAT_CHOICES = [
 
 PLAYER_FORMATS = [FORMAT_ODI, FORMAT_TEST, FORMAT_T20]
 
-# =========================
-# Best XI Selection Limits
-# =========================
+
 TOP_BATSMAN_COUNT = 4
 TOP_BOWLER_COUNT = 4
 TOP_ALL_ROUNDER_COUNT = 2
 TOP_KEEPER_COUNT = 1
 BEST_XI_TOTAL_COUNT = 11
 
-# =========================
-# Batting Stat Keys (JSON)
-# =========================
+
+PLAYER_NAME='name'
+PLAYER_BATTING_STYLE='batting_style'
+PLAYER_BOWLING_STYLE='bowling_style'
 BAT_STAT_MATCHES = 'matches'
 BAT_STAT_INNINGS = 'innings'
 BAT_STAT_RUNS = 'runs'
@@ -63,18 +56,14 @@ BAT_STAT_STRIKE_RATE = 'strike_rate'
 BAT_STAT_FIFTIES = 'fifties'
 BAT_STAT_HUNDREDS = 'hundreds'
 
-# =========================
-# Bowling Stat Keys (JSON)
-# =========================
+
 BOWL_STAT_OVERS = 'overs'
 BOWL_STAT_WICKETS = 'wickets'
 BOWL_STAT_ECONOMY = 'economy'
 BOWL_STAT_AVERAGE = 'bowling_average'
 BOWL_STAT_FIVE_WKT = 'five_wicket_hauls'
 
-# =========================
-# Player Model Field Names
-# =========================
+
 FIELD_PLAYER_FULL_NAME = 'player_full_name'
 FIELD_PLAYER_ROLE = 'player_role_type'
 FIELD_IS_ACTIVE = 'is_active_player'
@@ -94,3 +83,16 @@ FIELD_WICKETS = 'total_wickets_taken'
 FIELD_BOWL_ECO = 'bowling_economy_rate'
 FIELD_BOWL_AVG = 'bowling_average_score'
 FIELD_FIVE_WKTS = 'number_of_five_wicket_hauls'
+
+JSON_TEAM_KEY = 'team'
+JSON_PLAYERS_KEY = 'players'
+JSON_ROLE_KEY = 'role'
+JSON_BATTING_KEY = 'batting'
+JSON_BOWLING_KEY = 'bowling'
+
+# Team info fields from JSON
+JSON_TEAM_ID = 'team_id'
+JSON_COUNTRY_NAME = 'country_name'
+JSON_COUNTRY = 'country'
+JSON_NAME = 'name'
+JSON_SHORT_NAME = 'short_name'

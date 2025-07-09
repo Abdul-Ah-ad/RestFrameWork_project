@@ -1,7 +1,8 @@
-import os
 import json
+import os
 
 from django.core.management.base import BaseCommand, CommandError
+
 from cricdata_api.utils import sync_teams_and_players_from_json
 
 

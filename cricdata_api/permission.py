@@ -1,5 +1,6 @@
 from rest_framework.permissions import AllowAny, IsAdminUser
 
+
 class AdminPostPermissionMixin:
     """
     Mixin that allows only admins to perform POST requests,

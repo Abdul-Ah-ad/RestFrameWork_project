@@ -1,10 +1,20 @@
 from django.db import models
-from cricdata_api.constants import (
-    MATCH_FORMAT_CHOICES, FORMAT_UNKNOWN, PLAYER_ROLE_CHOICES
-)
+
+from cricdata_api.constants import (FORMAT_UNKNOWN, MATCH_FORMAT_CHOICES,
+                                    PLAYER_ROLE_CHOICES)
 
 
 class Team(models.Model):
+    """
+    Represents a cricket team.
+
+    Attributes:
+        external_team_id (int): Unique identifier from external source.
+        full_team_name (str): Full name of the team.
+        team_abbreviation (str): Abbreviation or short code for the team.
+        country_name (str): Country the team represents.
+        last_fetched_at (datetime): Timestamp when the team data was last updated.
+    """
     external_team_id = models.IntegerField(
         unique=True, verbose_name='External Team ID'
     )
@@ -20,10 +30,41 @@ class Team(models.Model):
     )
 
     def __str__(self):
+        """
+        Returns a human-readable name for the team.
+        """
         return self.full_team_name or f"Team {self.external_team_id}"
 
 
 class Player(models.Model):
+    """
+    Represents a cricket player and their statistical data.
+
+    Attributes:
+        external_player_id (int): Unique player ID from external source.
+        player_full_name (str): Full name of the player.
+        team (Team): Foreign key to the associated team.
+        format_category (str): Match format category (e.g., ODI, Test).
+        player_role_type (int): Player role (e.g., batsman, bowler).
+        is_active_player (bool): Whether the player is currently active.
+        batting_style_description (str): Batting hand/style description.
+        bowling_style_description (str): Bowling hand/style description.
+        total_matches_played (int): Number of matches played.
+        total_innings_batted (int): Number of innings batted.
+        total_runs_scored (int): Total runs scored in career.
+        career_batting_average (float): Batting average.
+        career_strike_rate (float): Batting strike rate.
+        number_of_fifties (int): Number of 50s scored.
+        number_of_hundreds (int): Number of 100s scored.
+        total_overs_bowled (float): Total overs bowled in career.
+        total_wickets_taken (int): Number of wickets taken.
+        bowling_economy_rate (float): Economy rate in bowling.
+        bowling_average_score (float): Bowling average.
+        number_of_five_wicket_hauls (int): Number of 5-wicket hauls.
+
+    Meta:
+        Ensures uniqueness of a player per format using external_player_id and format_category.
+    """
     external_player_id = models.IntegerField(verbose_name='External Player ID')
 
     player_full_name = models.CharField(max_length=100, verbose_name='Player Full Name')
@@ -51,7 +92,6 @@ class Player(models.Model):
         max_length=100, null=True, blank=True, verbose_name='Bowling Style left/right handed'
     )
 
-    # Batting Stats
     total_matches_played = models.PositiveSmallIntegerField(
         null=True, blank=True, verbose_name='Matches Played'
     )
@@ -74,7 +114,6 @@ class Player(models.Model):
         null=True, blank=True, verbose_name='Hundreds Scored'
     )
 
-    # Bowling Stats
     total_overs_bowled = models.FloatField(
         null=True, blank=True, verbose_name='Overs Bowled'
     )
@@ -95,4 +134,8 @@ class Player(models.Model):
         unique_together = ('external_player_id', 'format_category')
 
     def __str__(self):
+        """
+        Returns a string representation of the player along with their match format.
+        """
         return f"{self.player_full_name} ({self.get_format_category_display()})"
+

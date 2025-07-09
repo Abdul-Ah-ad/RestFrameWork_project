@@ -13,4 +13,3 @@ router.register('team-analysis', TeamAnalysisViewSet, basename='team-analysis')
 urlpatterns = [
     path('', include(router.urls)),
 ]
-
