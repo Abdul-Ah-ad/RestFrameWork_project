@@ -50,4 +50,3 @@ Endpoint	Method	Access
 /players/	POST	🔐 Admin only
 /inject-teams-data/upload/	POST	Import teams and players from JSON (admin only)
 /team-analysis/best/?team=Pakistan&category=odi	GET	Get best XI players by team and match type
-

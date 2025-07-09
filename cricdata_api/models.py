@@ -1,7 +1,7 @@
 from django.db import models
-
-from cricdata_api.constants import (FORMAT_UNKNOWN, MATCH_FORMAT_CHOICES,
-                                    PLAYER_ROLE_CHOICES)
+from cricdata_api.constants import (
+    MATCH_FORMAT_CHOICES, FORMAT_UNKNOWN, PLAYER_ROLE_CHOICES
+)
 
 
 class Team(models.Model):
@@ -138,4 +138,3 @@ class Player(models.Model):
         Returns a string representation of the player along with their match format.
         """
         return f"{self.player_full_name} ({self.get_format_category_display()})"
-
