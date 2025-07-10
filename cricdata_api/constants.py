@@ -1,53 +1,70 @@
-ROLE_STRING_TO_INT = {
-    'BATSMEN': 1,
-    'BATSMAN': 1,
-    'BOWLER': 2,
-    'ALLROUNDER': 3,
-    'ALL-ROUNDER': 3,
-    'WICKETKEEPER': 4,
-    'WICKET-KEEPER': 4,
-    'CAPTAIN': 5,
-    'VICECAPTAIN': 6,
-    'VICE-CAPTAIN': 6,
-}
-ROLE_ID_TO_LABEL = {
-    1: 'Batsman',
-    2: 'Bowler',
-    3: 'All-Rounder',
-    4: 'Wicket-Keeper',
-    5: 'Captain',
-    6: 'Vice-Captain',
-}
+class PlayerRole:
+    BATSMAN = 1
+    BOWLER = 2
+    ALL_ROUNDER = 3
+    WICKET_KEEPER = 4
+    CAPTAIN = 5
+    VICE_CAPTAIN = 6
 
-PLAYER_ROLE_CHOICES = sorted(ROLE_ID_TO_LABEL.items())
+    LABELS = {
+        BATSMAN: 'Batsman',
+        BOWLER: 'Bowler',
+        ALL_ROUNDER: 'All-Rounder',
+        WICKET_KEEPER: 'Wicket-Keeper',
+        CAPTAIN: 'Captain',
+        VICE_CAPTAIN: 'Vice-Captain',
+    }
 
-DEFAULT_MATCH_CATEGORY = 'odi'
+    CHOICES = sorted(LABELS.items())
 
-FORMAT_ODI = 'odi'
-FORMAT_TEST = 'test'
-FORMAT_T20 = 't20'
-FORMAT_UNKNOWN = 'unknown'
+    CRICKET_ROLE_LABEL_MAPPER  = {
+        'BATSMEN': BATSMAN,
+        'BATSMAN': BATSMAN,
+        'BOWLER': BOWLER,
+        'ALLROUNDER': ALL_ROUNDER,
+        'ALL-ROUNDER': ALL_ROUNDER,
+        'WICKETKEEPER': WICKET_KEEPER,
+        'WICKET-KEEPER': WICKET_KEEPER,
+        'CAPTAIN': CAPTAIN,
+        'VICECAPTAIN': VICE_CAPTAIN,
+        'VICE-CAPTAIN': VICE_CAPTAIN,
+    }
 
-MATCH_FORMAT_CHOICES = [
-    (FORMAT_ODI, 'ODI'),
-    (FORMAT_TEST, 'Test'),
-    (FORMAT_T20, 'T20'),
-    (FORMAT_UNKNOWN, 'Unknown'),
-]
 
-PLAYER_FORMATS = [FORMAT_ODI, FORMAT_TEST, FORMAT_T20]
+class MatchFormat:
+    TEST = 1
+    ODI = 2
+    T20 = 3
+    UNKNOWN = 0
+
+    FORMAT_LABELS = {
+        TEST: "test",
+        ODI: "odi",
+        T20: "t20",
+        UNKNOWN: "unknown"
+    }
+
+    INTEGER_CHOICES = [
+        (UNKNOWN, "unknown"),
+        (TEST, "test"),
+        (ODI, "odi"),
+        (T20, "t20"),
+    ]
+
+    SUPPORTED = [TEST, ODI, T20]
 
 
 TOP_BATSMAN_COUNT = 4
 TOP_BOWLER_COUNT = 4
 TOP_ALL_ROUNDER_COUNT = 2
 TOP_KEEPER_COUNT = 1
-BEST_XI_TOTAL_COUNT = 11
+BEST_ELEVEN_TOTAL_COUNT = 11
 
 
-PLAYER_NAME='name'
-PLAYER_BATTING_STYLE='batting_style'
-PLAYER_BOWLING_STYLE='bowling_style'
+PLAYER_NAME = 'name'
+PLAYER_BATTING_STYLE = 'batting_style'
+PLAYER_BOWLING_STYLE = 'bowling_style'
+
 BAT_STAT_MATCHES = 'matches'
 BAT_STAT_INNINGS = 'innings'
 BAT_STAT_RUNS = 'runs'
@@ -56,7 +73,6 @@ BAT_STAT_STRIKE_RATE = 'strike_rate'
 BAT_STAT_FIFTIES = 'fifties'
 BAT_STAT_HUNDREDS = 'hundreds'
 
-
 BOWL_STAT_OVERS = 'overs'
 BOWL_STAT_WICKETS = 'wickets'
 BOWL_STAT_ECONOMY = 'economy'
@@ -64,35 +80,35 @@ BOWL_STAT_AVERAGE = 'bowling_average'
 BOWL_STAT_FIVE_WKT = 'five_wicket_hauls'
 
 
-FIELD_PLAYER_FULL_NAME = 'player_full_name'
-FIELD_PLAYER_ROLE = 'player_role_type'
-FIELD_IS_ACTIVE = 'is_active_player'
-FIELD_BATTING_STYLE = 'batting_style_description'
-FIELD_BOWLING_STYLE = 'bowling_style_description'
+PLAYER_FULL_NAME = 'player_full_name'
+PLAYER_ROLE = 'player_role_type'
+IS_ACTIVE = 'is_active_player'
+BATTING_STYLE = 'batting_style_description'
+BOWLING_STYLE = 'bowling_style_description'
 
-FIELD_MATCHES = 'total_matches_played'
-FIELD_INNINGS = 'total_innings_batted'
-FIELD_RUNS = 'total_runs_scored'
-FIELD_BAT_AVG = 'career_batting_average'
-FIELD_STRIKE_RATE = 'career_strike_rate'
-FIELD_50S = 'number_of_fifties'
-FIELD_100S = 'number_of_hundreds'
+TOTAL_NO_OF_MATCHES_PLAYED = 'total_matches_played'
+TOTAL_NO_OF_INNINGS_BATTED = 'total_innings_batted'
+TOTAL_NO_OF_RUNS_SCORED = 'total_runs_scored'
+CAREER_BATTING_AVERAGE = 'career_batting_average'
+CAREER_STRIKE_RATE = 'career_strike_rate'
+TOTAL_NO_OF_FIFTIES = 'number_of_fifties'
+TOTAL_NO_OF_HUNDREDS = 'number_of_hundreds'
 
-FIELD_OVERS = 'total_overs_bowled'
-FIELD_WICKETS = 'total_wickets_taken'
-FIELD_BOWL_ECO = 'bowling_economy_rate'
-FIELD_BOWL_AVG = 'bowling_average_score'
-FIELD_FIVE_WKTS = 'number_of_five_wicket_hauls'
+NO_OF_OVERS_BOWLED = 'total_overs_bowled'
+NO_OF_WICKETS_TAKEN = 'total_wickets_taken'
+ECONOMY_RATE = 'bowling_economy_rate'
+BOWLING_AVERAGE = 'bowling_average_score'
+NO_OF_FIVE_WICKET_HAULS = 'number_of_five_wicket_hauls'
 
-JSON_TEAM_KEY = 'team'
-JSON_PLAYERS_KEY = 'players'
-JSON_ROLE_KEY = 'role'
-JSON_BATTING_KEY = 'batting'
-JSON_BOWLING_KEY = 'bowling'
 
-# Team info fields from JSON
-JSON_TEAM_ID = 'team_id'
-JSON_COUNTRY_NAME = 'country_name'
-JSON_COUNTRY = 'country'
-JSON_NAME = 'name'
-JSON_SHORT_NAME = 'short_name'
+TEAM_OBJECT_KEY = 'team'
+PLAYER_LIST_KEY = 'players'
+PLAYER_ROLE_KEY = 'role'
+PLAYER_BATTING_STATS_KEY = 'batting'
+PLAYER_BOWLING_STATS_KEY = 'bowling'
+
+TEAM_ID_KEY = 'team_id'
+TEAM_COUNTRY_NAME_KEY = 'country_name'
+TEAM_COUNTRY_CODE_KEY = 'country'
+TEAM_NAME_KEY = 'name'
+TEAM_SHORT_NAME_KEY = 'short_name'

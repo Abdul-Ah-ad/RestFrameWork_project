@@ -1,8 +1,11 @@
+"""
+Defines all the URL routes for the cricdata_api application using DRF routers.
+"""
+
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from cricdata_api.viewsets import (InjectDataViewSet, PlayerViewSet,
-                                   TeamAnalysisViewSet, TeamViewSet)
+from cricdata_api.viewsets import (InjectDataViewSet, PlayerViewSet,TeamAnalysisViewSet, TeamViewSet)
 
 router = DefaultRouter()
 router.register('teams', TeamViewSet, basename='team')

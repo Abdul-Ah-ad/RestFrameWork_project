@@ -16,19 +16,19 @@ class Command(BaseCommand):
         json_file_path = options['json_file_path']
 
         if not os.path.exists(json_file_path):
-            raise CommandError(f"❌ File does not exist: {json_file_path}")
+            raise CommandError(f'❌ File does not exist: {json_file_path}')
 
-        self.stdout.write(f"📂 Loading file: {json_file_path}")
+        self.stdout.write(f'📂 Loading file: {json_file_path}')
         
         try:
             with open(json_file_path, 'r') as f:
                 json_data = json.load(f)
         except json.JSONDecodeError as e:
-            raise CommandError(f"❌ JSON decode error: {e}")
+            raise CommandError(f'❌ JSON decode error: {e}')
 
         updated = sync_teams_and_players_from_json(json_data)
 
         if updated:
-            self.stdout.write(self.style.SUCCESS("✅ Data imported or updated successfully."))
+            self.stdout.write(self.style.SUCCESS('✅ Data imported or updated successfully.'))
         else:
-            self.stdout.write(self.style.WARNING("🟢 No changes detected. Data is already up-to-date."))
+            self.stdout.write(self.style.WARNING('🟢 No changes detected. Data is already up-to-date.'))

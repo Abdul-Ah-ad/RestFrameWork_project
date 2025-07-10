@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from cricdata_api.constants import PLAYER_FORMATS
 from cricdata_api.models import Player, Team
 from cricdata_api.utils import save_or_update_all_players
 
@@ -27,7 +26,8 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ['external_team_id', 'full_team_name', 'team_abbreviation', 'country_name', 'players']
+        fields = [
+            'external_team_id','full_team_name','team_abbreviation','country_name','players']
 
     def create(self, validated_data):
         """
@@ -39,7 +39,8 @@ class TeamSerializer(serializers.ModelSerializer):
             external_team_id=validated_data['external_team_id'],
             defaults=validated_data
         )
-        save_or_update_all_players(players_data, team)
+        if players_data:
+            save_or_update_all_players(players_data, team)
         return team
 
     def update(self, instance, validated_data):
@@ -51,5 +52,6 @@ class TeamSerializer(serializers.ModelSerializer):
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
-        save_or_update_all_players(players_data, instance)
+        if players_data:
+            save_or_update_all_players(players_data, instance)
         return instance
