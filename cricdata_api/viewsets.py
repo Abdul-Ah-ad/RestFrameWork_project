@@ -110,3 +110,4 @@ class TeamAnalysisViewSet(viewsets.ViewSet):
 
         result = get_best_eleven_players(team_name, match_category)
         return Response(result, status=status.HTTP_200_OK)
+
