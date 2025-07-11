@@ -14,3 +14,4 @@ router.register('inject-teams-data', InjectDataViewSet, basename='inject-data')
 router.register('team-analysis', TeamAnalysisViewSet, basename='team-analysis')
 
 urlpatterns = [path('', include(router.urls)),]
+

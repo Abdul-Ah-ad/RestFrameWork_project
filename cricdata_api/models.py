@@ -92,3 +92,4 @@ class Player(models.Model):
         Returns a string representation of the player along with their match format.
         """
         return f'{self.player_full_name} ({self.get_format_category_display()})'
+

@@ -32,3 +32,4 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS('✅ Data imported or updated successfully.'))
         else:
             self.stdout.write(self.style.WARNING('🟢 No changes detected. Data is already up-to-date.'))
+

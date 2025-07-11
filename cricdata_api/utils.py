@@ -310,3 +310,4 @@ def get_best_eleven_players(team_name: str, match_format: str):
         selected_players += remaining_players[:BEST_ELEVEN_TOTAL_COUNT - len(selected_players)]
 
     return PlayerSerializer(selected_players, many=True).data
+

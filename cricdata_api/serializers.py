@@ -55,3 +55,4 @@ class TeamSerializer(serializers.ModelSerializer):
         if players_data:
             save_or_update_all_players(players_data, instance)
         return instance
+

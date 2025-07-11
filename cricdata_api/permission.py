@@ -11,3 +11,4 @@ class AdminPostPermissionMixin:
         if self.request.method == 'POST':
             return [IsAdminUser()]
         return [AllowAny()]
+
