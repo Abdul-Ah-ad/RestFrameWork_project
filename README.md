@@ -1,1 +1,52 @@
-# RestFrameWork_project
+# 🏏 CricData API — Django REST Framework Project
+
+A cricket stats API built using Django REST Framework. It allows importing teams and players from JSON, and provides endpoints to fetch players, teams, and best XI selections.
+
+
+## ⚙️ Setup Instructions
+
+### 🔁 Clone and Setup Environment
+
+```bash
+git clone https://github.com/Abdul-Ah-ad/RestFrameWork_project/cricdata-api.git
+cd cricdata-api
+git checkout ahad/feat/Cric_Api
+
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+pip install -r requirements.txt  # Or manually: pip install django djangorestframework
+
+add&config local.py 
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser
+
+python manage.py inject_teams_data combined_stats.json #save .json file in root folder
+
+Using Postman
+1. Import API in Postman
+Set base URL: http://127.0.0.1:8000
+
+2. Admin-only Endpoint (Import JSON)
+api/inject-teams-data/upload/
+
+
+Authorization → basic Auth → Provide Django admin credentials
+api/user/token/ token for admin post requests 
+get the access token 
+Open in Authorization Bearer Token paste access token
+open Body -> form-data->key=file,type=input,value=selectfile(.json)
+send 
+
+
+Endpoint	Method	Access
+/user/token/ token for admin post requests 
+/teams/	GET	✅ Public (anyone)
+/teams/	POST	🔐 Admin only
+/players/	GET	✅ Public (anyone)
+/players/	POST	🔐 Admin only
+/inject-teams-data/upload/	POST	Import teams and players from JSON (admin only)
+/team-analysis/best/?team=Pakistan&category=odi	GET	Get best XI players by team and match type
